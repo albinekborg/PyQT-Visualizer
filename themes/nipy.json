@@ -1,0 +1,7 @@
+{
+  "use_mpl": "True",
+  "matplotlib_theme": "nipy_spectral",
+  "gradient_offset": 0,
+  "border_color": "red",
+  "background_color": "black"
+}

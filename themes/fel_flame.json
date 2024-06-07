@@ -1,0 +1,22 @@
+{
+  "use_mpl": "False",
+  "custom_gradient": {
+    "colors": [
+      "#020024",
+      "#534a00",
+      "#8da100",
+      "#9eda00",
+      "#85ff00"
+    ],
+    "positions": [
+      0,
+      15,
+      35,
+      70,
+      100
+    ]
+  },
+  "gradient_offset": 0,
+  "border_color": "#8da100",
+  "background_color": "#020024"
+}

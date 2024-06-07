@@ -1,0 +1,44 @@
+{
+  "use_mpl": "False",
+  "custom_gradient": {
+    "colors": [
+      "#ffffff",
+      "#fbf6fe",
+      "#ffc978",
+      "#e4f0a7",
+      "#acf3b7",
+      "#8a4dff",
+      "#e8aaff",
+      "#a7b0f3",
+      "#04adfe",
+      "#a7f3b9",
+      "#d8f3a7",
+      "#f3eca7",
+      "#f3dba7",
+      "#ffd987",
+      "#ffbe6e",
+      "#ff906e"
+    ],
+    "positions": [
+      0,
+      8,
+      12,
+      16,
+      21,
+      25,
+      30,
+      37,
+      47,
+      54,
+      64,
+      73,
+      82,
+      87,
+      92,
+      100
+    ]
+  },
+  "gradient_offset": 10,
+  "border_color": "#ffbe6e",
+  "background_color": "#ffffff"
+}
