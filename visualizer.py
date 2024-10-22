@@ -3,7 +3,7 @@ import sys
 import numpy as np
 import pyaudio
 
-import colormaps
+#import colormaps
 from widget_themes import Theme
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QGraphicsScene, QGraphicsTextItem, QGraphicsView
@@ -20,8 +20,10 @@ RATE = 10000  # Samples per second
 class AudioSpectrogram(QMainWindow):
     def __init__(self):
         super().__init__()
-
-        self.theme = Theme(theme_name = "soft_sky")
+        try: 
+            self.theme = Theme(theme_name = sys.argv[1])
+        except IndexError:
+            self.theme = Theme(theme_name = "summer")
         self.colormap = self.theme.get_pg_colormap()
         self.lut = self.theme.get_lookup_table()
 
@@ -60,6 +62,8 @@ class AudioSpectrogram(QMainWindow):
         self.widget_1 = pg.PlotWidget()
         self.widget_1.setBackground(self.theme.get_background_color())
         self.widget_1.addItem(self.img_item_1)
+        self.widget_1.getPlotItem().hideAxis('bottom')
+        self.widget_1.getPlotItem().hideAxis('left')
         self.widget_1.getPlotItem().getAxis('left').setLogMode(False, True)
         self.widget_1.getPlotItem().vb.setLimits(yMin=1, yMax=CHUNK//2)  # You might need to adjust the upper limit based on your data
         layout.addWidget(self.widget_1)
@@ -102,18 +106,24 @@ class AudioSpectrogram(QMainWindow):
         self.yf = np.fft.rfft(self.tbuf * np.hanning(len(self.tbuf)))[1:]
         self.buf = np.concatenate([np.abs(self.yf[np.newaxis, :]), self.buf[:-1]], axis=0)
         
+        ## Digitize ? :D
+        #self.buf = np.digitize(self.buf, [0,1,10,100,1000,10000])
+
         buf_win = self.buf
+        #buf_win = np.digitize(buf_win, [0,1,10,100,1000,10000])
         self.img = np.log1p(buf_win+1e3)
         self.img_item_1.setImage(self.img, autoLevels=True)
         
         win = np.exp(np.linspace(7,0,len(self.buf)))[:,np.newaxis]
+
         ### Centered
         fft2 = np.abs(np.fft.fftshift(np.fft.fft2(self.buf*win),axes=(1,0)))
+        #print(np.min(fft2))
 
         ### Immersive
         #fft2 = np.abs(np.fft.fft2(self.buf*win))
-
-        fft2_img = np.log1p(fft2+1e8)
+        #fft2 = np.digitize(fft2, [0,1e5,1e6,1e7,1e8,5e8,5e9,1e10])
+        fft2_img = np.log1p(fft2 + 1e8)
         self.img_item_2.setImage(fft2_img, autoLevels=True)
         
 
