@@ -20,3 +20,13 @@ python visualizer.py [theme_name]
 ```
 
 If no theme is specified, it defaults to "summer" theme.
+
+*NOTE* Depending on how your system is setup, the wrong pyaudio device might be selected. To list all pyaudio devices, run the following code:
+```python
+import pyaudio
+p = pyaudio.PyAudio()
+for i in range(p.get_device_count()):
+    print(p.get_device_info_by_index(i))
+
+```
+And change the DEFAULT_DEVICE variable in visualizer.py to the index corresponding to your preferred pyaudio device.

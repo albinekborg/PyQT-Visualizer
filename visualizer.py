@@ -16,6 +16,7 @@ CHUNK = 200  # Number of audio samples per frame
 FORMAT = pyaudio.paInt16  # Audio format (16-bit PCM)
 CHANNELS = 1  # Single channel for microphone
 RATE = 10000  # Samples per second
+DEFAULT_DEVICE = 1 # See README.MD
 
 class AudioSpectrogram(QMainWindow):
     def __init__(self):
@@ -33,7 +34,7 @@ class AudioSpectrogram(QMainWindow):
 
     def setup_audio(self):
         self.p = pyaudio.PyAudio()
-        self.stream = self.p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+        self.stream = self.p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK, input_device_index = DEFAULT_DEVICE)
         self.prev_img = None
         self.yf = 0
         self.buf_size = 256
@@ -65,7 +66,7 @@ class AudioSpectrogram(QMainWindow):
         self.widget_1.getPlotItem().hideAxis('bottom')
         self.widget_1.getPlotItem().hideAxis('left')
         self.widget_1.getPlotItem().getAxis('left').setLogMode(False, True)
-        self.widget_1.getPlotItem().vb.setLimits(yMin=1, yMax=CHUNK//2)  # You might need to adjust the upper limit based on your data
+        self.widget_1.getPlotItem().vb.setLimits(yMin=1, yMax=CHUNK//2)  
         layout.addWidget(self.widget_1)
 
 
