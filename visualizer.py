@@ -127,7 +127,6 @@ class AudioSpectrogram(QMainWindow):
         self.img_item_2.setImage(fft2_img, autoLevels=True)
         
 
-        ## GPT TEXT
 
         bass = np.abs(np.mean(self.yf[:20]))
         mids = np.abs(np.mean(self.yf[20:75]))
@@ -172,7 +171,6 @@ class AudioSpectrogram(QMainWindow):
             pos = item.pos()
             item.setPos(pos.x(), pos.y() - 13) 
         self.text_items = [item for item in self.text_items if item.pos().y() > -self.widget_3.height()]
-        ## GPT TEXT
 
 
 

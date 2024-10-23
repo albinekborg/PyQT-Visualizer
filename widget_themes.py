@@ -124,4 +124,3 @@ class Theme():
     def get_pg_colormap(self):
         """ Return the full pyqtgraph colormap object. """
         return self.colormap.pg_colormap
-    #TODO: Add support for custom themes via json in theme_directory
